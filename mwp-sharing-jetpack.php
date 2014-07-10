@@ -4,11 +4,13 @@
  * Plugin URI: http://wordpress.org/plugins/mwp-sharing-jetpack/
  * Description: Add a ManageWP.org button to the Jetpack Sharing module
  * Author: Jeremy Herve
- * Version: 1.2.3
+ * Version: 1.3
  * Author URI: http://jeremyherve.com
  * License: GPL2+
  * Text Domain: mwpjp
  */
+
+define( 'MWPJP__VERSION', '1.3' );
 
 class Mwporg_Button {
 	private static $instance;
@@ -32,6 +34,7 @@ class Mwporg_Button {
 	public function setup() {
 		add_filter( 'sharing_services',   array( $this, 'inject_service' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'icon_style' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'update_sharing_count' ) );
 	}
 
 	// Add the ManageWP.org Button to the list of services in Sharedaddy
@@ -46,6 +49,12 @@ class Mwporg_Button {
 	public function icon_style() {
 		wp_register_style( 'mwpjp', plugins_url( 'style.css', __FILE__) );
 		wp_enqueue_style( 'mwpjp' );
+	}
+
+	// Add the javascript necessary for the share count to be displayed
+	public function update_sharing_count() {
+		wp_register_script( 'mwpjp', plugins_url( 'sharing-count.js', __FILE__ ), array( 'jquery' ), MWPJP__VERSION, true );
+		wp_enqueue_script( 'mwpjp' );
 	}
 
 	// Prompt to install Jetpack
