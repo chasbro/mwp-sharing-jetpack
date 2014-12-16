@@ -1,7 +1,7 @@
 (function( $ ) {
 
 	// Initialize to an empty until it's populated by the response
-	var WPCOM_sharing_counts = [];
+	WPCOM_sharing_counts = WPCOM_sharing_counts || [];
 
 	window.update_mpworg_widget = update_mpworg_widget;
 
@@ -13,7 +13,9 @@
 			return;
 		}
 
-		$('#sharing-mwporg-' + id + ' span').append( '<span class="share-count">' + response.votes + '</span>' );
+		var $share = jQuery( 'a[data-shared=sharing-mwp-' + id + '] > span');
+		$share.find( '.share-count' ).remove();
+		$share.append( '<span class="share-count">' + response.votes + '</span>' );
 
 	}
 
@@ -26,7 +28,7 @@
 			id = WPCOM_sharing_counts[ url ];
 
 			// Only send a request if a matching widget is found
-			if ( $( '#sharing-mwporg-' + id ).length ) {
+			if ( jQuery( 'a[data-shared=sharing-mwp-' + id  + ']' ).length ) {
 				$.getScript( 'http://managewp.org/share/frame/small?url=' + encodeURIComponent( url ) + '&callback=update_mpworg_widget' );
 			}
 
