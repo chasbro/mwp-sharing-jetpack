@@ -3,7 +3,7 @@ Contributors: jeherve
 Tags: WordPress.com, Jetpack, sharing, ManageWP, mwp
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 1.5
+Stable tag: 1.5.1
 
 Add a ManageWP.org sharing button to the Jetpack Sharing module
 
@@ -27,6 +27,9 @@ Kudos to [Jeff](https://twitter.com/jeffr0) who gave me the idea for this plugin
 6. Enjoy! :)
 
 == Changelog ==
+
+= 1.5.1 =
+* Avoid Mixed content warnings on https sites by fetching sharing counts via https when necessary, props @swissspidy
 
 = 1.5 =
 * urlencode post links in sharing link.
